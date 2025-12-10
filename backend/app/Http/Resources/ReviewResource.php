@@ -17,7 +17,7 @@ class ReviewResource extends JsonResource
             'listing_id' => $this->listing_id,
             'booking_id' => $this->booking_id,
             'rating' => $this->rating,
-            'commemt' => $this->commemt,
+            'comment' => $this->comment,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

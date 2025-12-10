@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -87,4 +88,28 @@ class User extends Authenticatable
         $this->update(['is_host' => true, 'host_since' => now()]);
     }
 
+    public function hostSince() {
+        return $this->host_since ?? now();
+    }
+    // Relations
+
+   public function listings(): HasMany
+   {
+       return $this->hasMany(Listing::class, 'host_id');
+   }
+
+   public function bookings(): HasMany
+   {
+       return $this->hasMany(Booking::class);
+   }
+
+   public function reviews(): HasMany
+   {
+       return $this->hasMany(Review::class);
+   }
+
+   public function receivedReviews(): HasMany
+   {
+       return $this->hasMany(Review::class, 'host_id');
+   }
 }
